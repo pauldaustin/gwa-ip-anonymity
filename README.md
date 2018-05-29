@@ -1,6 +1,8 @@
 # kong-plugin-gwa-ip-anonymity
 
-Kong Plugin to change the X-Forwarded-For header so that the original client's IP address
+A Kong plugin (current DataBC API Gateway) used for hide full or partial client IP to upstream services.
+
+Change the X-Forwarded-For header so that the original client's IP address
 last part is set to zero. For example 24.5.6.11 would become 24.5.6.0.  
 
 NOTE: This version requires kong 0.12.x
