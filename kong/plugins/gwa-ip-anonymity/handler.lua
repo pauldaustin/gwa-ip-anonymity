@@ -3,7 +3,7 @@ local BasePlugin = require "kong.plugins.base_plugin"
 local BcGovIpAnonymousHandler = BasePlugin:extend()
 
 function BcGovIpAnonymousHandler:new()
-  BcGovIpAnonymousHandler.super.new(self, "bcgov-ip-anonymous")
+  BcGovIpAnonymousHandler.super.new(self, "gwa-ip-anonymity")
 end
 
 
