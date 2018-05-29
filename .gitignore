@@ -1,7 +1,9 @@
+# ---> Lua
 # Compiled Lua sources
 luac.out
 
 # luarocks build files
+*.rock
 *.src.rock
 *.zip
 *.tar.gz
@@ -38,4 +40,16 @@ luac.out
 *.i*86
 *.x86_64
 *.hex
+
+target
+.settings
+.project
+.classpath
+*.log
+*.log.*
+*.mdmp
+.DS_Store
+~*
+*.tmp
+*.ldb
 
