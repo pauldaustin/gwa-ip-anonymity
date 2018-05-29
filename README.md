@@ -14,8 +14,8 @@ Follow these instructions to create a new release for a version (e.g. 1.0.0).
 VERSION=1.0.0
 
 # Clone the source code (always checkout a clean copy)
-git clone https://github.com/bcgov/kong-plugin-gwa-ip-anonymity
-cd kong-plugin-gwa-ip-anonymity
+git clone https://github.com/bcgov/gwa-ip-anonymity
+cd gwa-ip-anonymity
 
 # Create a new branch
 git checkout -b $VERSION-branch
@@ -40,7 +40,7 @@ git push origin $VERSION
 
 # Delete the checked out repository
 cd ..
-rm -rf kong-plugin-gwa-ip-anonymity
+rm -rf gwa-ip-anonymity
 ```
 
 ## Installing
@@ -53,8 +53,8 @@ Follow these instructions to deploy the plugin to each Kong server in the cluste
 VERSION=1.0.0
 
 # Clone the source code (always checkout a clean copy)
-git clone https://gogs.data.gov.bc.ca/DataBC/kong-plugin-gwa-ip-anonymity
-cd kong-plugin-gwa-ip-anonymity
+git clone https://github.com/bcgov/gwa-ip-anonymity
+cd gwa-ip-anonymity
 
 # Checkout the version to a branch
 git checkout tags/$VERSION -b $VERSION-branch
@@ -64,7 +64,7 @@ luarocks make
 
 # Delete the checked out repository
 cd ..
-rm -rf kong-plugin-gwa-ip-anonymity
+rm -rf gwa-ip-anonymity
 ```
 
 ### Add the plugin to the kong configuration
