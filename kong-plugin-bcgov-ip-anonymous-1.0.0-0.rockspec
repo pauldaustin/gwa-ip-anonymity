@@ -2,7 +2,7 @@ package = "kong-plugin-bcgov-ip-anonymous"
 version = "1.0.0-0"
 supported_platforms = {"linux", "macosx"}
 source = {
-  url = "https://gogs.data.gov.bc.ca/DataBC/kong-bcgov-ip-anonymous",
+  url = "https://gogs.data.gov.bc.ca/DataBC/kong-plugin-bcgov-ip-anonymous",
   tag = "1.0.0"
 }
 description = {
