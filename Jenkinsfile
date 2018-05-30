@@ -50,7 +50,7 @@ git push origin ${gitTag}
   }
 
   stage ('Upload') {
-    'sh luarocks upload kong-plugin-gwa-ip-anonymity-${gitTag}-0.rockspec --api-key=${luarocksApiKey}'
+    sh 'luarocks upload kong-plugin-gwa-ip-anonymity-${gitTag}-0.rockspec --api-key=${luarocksApiKey}'
   }
 
 }
