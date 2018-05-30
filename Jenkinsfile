@@ -5,9 +5,13 @@
 // luarocksApiKey
 
 node ('master') {
-  def artifactoryServer = Artifactory.server 'prod'
-  def mavenRuntime = Artifactory.newMavenBuild()
-  def buildInfo
+
+  stage ('SCM globals') {
+     sh '''
+git config --global user.email "paul.austin@revolsys.com"
+git config --global user.name "Paul Austin"
+     '''
+  }
 
   stage ('Checkout') {
     dir('source') {
@@ -43,7 +47,6 @@ git push origin ${gitTag}
       '''
     }
   }
-
 
   stage ('Upload') {
     'sh luarocks upload kong-plugin-gwa-ip-anonymity-${gitTag}-0.rockspec --api-key=${luarocksApiKey}'
