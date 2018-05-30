@@ -8,40 +8,44 @@ last part is set to zero. For example 24.5.6.11 would become 24.5.6.0.
 NOTE: This version requires kong 0.12.x
 
 ## Releasing
-Follow these instructions to create a new release for a version (e.g. 1.0.0).
+Follow these instructions to create a new release for a version.
 
-```bash
-VERSION=1.0.0
+### Create Jenkins job
+If not already setup create a Jenkins pipeline job with the following parameters
 
-# Clone the source code (always checkout a clean copy)
-git clone https://github.com/bcgov/gwa-ip-anonymity
-cd gwa-ip-anonymity
+Pipeline name: gwa-ip-anonymity-release
 
-# Create a new branch
-git checkout -b $VERSION-branch
+Discard old builds:
+  Max # of builds to keep: 2
 
-# Rename the rockspec file to the new version (if required).
-mv kong-plugin-gwa-ip-anonymity-*-0.rockspec kong-plugin-gwa-ip-anonymity-${VERSION}-0.rockspec
+This Project is parameterized: Yes
+  Choice Parameter
+    Name: gitBranch
+    Choices: master (more can be added if used)
+  String Parameter
+    Name: gitTag
+    Trim the string: yes
+  Passord Parameter
+    Name: luarocksApiKey
+    Default value: A luarocks.org api Key
 
-# Edit the rockspec file for the new version
-vi kong-plugin-gwa-ip-anonymity-${VERSION}-0.rockspec
-```
+Definiion: Pipeline script from SCM
+  SCM: git
+  Repositories:
+    Repository URL: git@github.com:bcgov/gwa-ip-anonymity.git
+    Credentials: A personal access token credential for a github.com user with write permission for the repository
+  Branches to build: */jenkins-release
+  Script path: Jenkinsfile
+  Lightweight checkout: Yes
+  
+### Running Jenkins job
+The jenkins job will update the version in the source code and deploy to luarocks
 
-```
-  version = "1.0.0-0"
-  tag = "1.0.0"
-```
-
-```bash
-# Commit the changes and tag version
-git commit -a -m "Version $VERSION"
-git tag $VERSION
-git push origin $VERSION
-
-# Delete the checked out repository
-cd ..
-rm -rf gwa-ip-anonymity
-```
+1. Click Build with Parameters on the job.
+2. Select the gitBranch (e.g. master).
+3. Enter the gitTag (e.g. 1.0.0) which is the version number of the release.
+4. Enter the luarocksApiKey (if not set as a default).
+5. Click build.
 
 ## Installing
 
@@ -49,23 +53,7 @@ Follow these instructions to deploy the plugin to each Kong server in the cluste
 
 ### Install the luarocks file
 
-```bash
-VERSION=1.0.0
-
-# Clone the source code (always checkout a clean copy)
-git clone https://github.com/bcgov/gwa-ip-anonymity
-cd gwa-ip-anonymity
-
-# Checkout the version to a branch
-git checkout tags/$VERSION -b $VERSION-branch
-
-# Make the lua rock file and deploy to the shared lua repository
-luarocks make
-
-# Delete the checked out repository
-cd ..
-rm -rf gwa-ip-anonymity
-```
+`luarocks install kong-plugin-gwa-ip-anonymity`
 
 ### Add the plugin to the kong configuration
 
