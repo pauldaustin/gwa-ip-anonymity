@@ -1,11 +1,9 @@
 // parameters
 // ----------
+// gitBranch
 // gitTag
+// luarocksApiKey
 
-def replace = { File source, String toSearch, String replacement ->
-  source.write(source.text.replaceAll(toSearch, replacement))
-}
-    
 node ('master') {
   def artifactoryServer = Artifactory.server 'prod'
   def mavenRuntime = Artifactory.newMavenBuild()
@@ -47,7 +45,8 @@ git push origin ${gitTag}
   }
 
 
-  stage ('Deploy') {
+  stage ('Upload') {
+    'sh luarocks upload kong-plugin-gwa-ip-anonymity-${gitTag}-0.rockspec --api-key=${luarocksApiKey}'
   }
 
 }
