@@ -32,7 +32,7 @@ node ('master') {
 git checkout -B version-${gitTag}
 git mv kong-plugin-gwa-ip-anonymity-VERSION-0.rockspec kong-plugin-gwa-ip-anonymity-${gitTag}-0.rockspec
 '''
-      replace('kong-plugin-gwa-ip-anonymity-${gitTag}-0.rockspec', 'VERSION', '${gitTag'})
+      replace('kong-plugin-gwa-ip-anonymity-${gitTag}-0.rockspec', 'VERSION', '${gitTag}')
     }
   }
 
