@@ -23,7 +23,7 @@ git config --global user.name "Paul Austin"
         extensions: [],
         gitTool: 'Default',
         submoduleCfg: [],
-        userRemoteConfigs: [[url: 'ssh://git@github.com/pauldaustin/gwa-ip-anonymity.git']]
+        userRemoteConfigs: [[url: 'ssh://git@github.com/bcgov/gwa-ip-anonymity.git']]
       ])
     }
   }
