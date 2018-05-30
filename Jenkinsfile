@@ -43,6 +43,7 @@ git mv kong-plugin-gwa-ip-anonymity-VERSION-0.rockspec kong-plugin-gwa-ip-anonym
       sh '''
 git commit -a -m "Version ${gitTag}"
 git tag -f -a ${gitTag} -m "Version ${gitTag}"
+git push origin :${gitTag}
 git push origin ${gitTag}
       '''
     }
