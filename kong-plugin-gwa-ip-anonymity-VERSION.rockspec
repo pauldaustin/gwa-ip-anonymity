@@ -1,8 +1,8 @@
 package = "kong-plugin-gwa-ip-anonymity"
-version = "VERSION-0"
+version = "VERSION"
 supported_platforms = {"linux", "macosx"}
 source = {
-  url = "git://github.com/bcgov/gwa-ip-anonymity",
+  url = "git://github.com/GITHUB_PROJECT",
   tag = "VERSION"
 }
 description = {
