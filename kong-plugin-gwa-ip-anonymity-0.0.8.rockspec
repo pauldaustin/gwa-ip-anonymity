@@ -1,9 +1,9 @@
 package = "kong-plugin-gwa-ip-anonymity"
-version = "VERSION-0"
+version = "0.0.8-0"
 supported_platforms = {"linux", "macosx"}
 source = {
   url = "git://github.com/bcgov/gwa-ip-anonymity",
-  tag = "VERSION"
+  tag = "0.0.8"
 }
 description = {
   summary = "BC Government Kong Plugin IP Address Anonymizer",
