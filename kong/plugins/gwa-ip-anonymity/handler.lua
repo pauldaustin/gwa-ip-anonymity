@@ -10,16 +10,14 @@ end
 function BcGovIpAnonymousHandler:access(conf)
   BcGovIpAnonymousHandler.super.access(self)
   local origin = ngx.var.upstream_x_forwarded_for
-  local clientIp
-  local commaIndex = origin:find(",")
-  if commaIndex then
-    clientIp = origin:sub( 1, commaIndex - 1)
-  else
-    clientIp = origin
-  end
-  clientIp = clientIp:gsub("([.:])%d+$", "%10")
+  origin = origin:gsub('%s+', '')
+  
+  local origins = {}
+  origin:gsub('([^,]+)', function(clientIp)
+    origins[#origins+1] = clientIp:gsub('([.:])%d+$', '%10')
+  end)
 
-  ngx.var.upstream_x_forwarded_for = clientIp..origin:sub(commaIndex)
+  ngx.var.upstream_x_forwarded_for = table.concat(origins, ', ')
 end
 
 BcGovIpAnonymousHandler.PRIORITY = 0
