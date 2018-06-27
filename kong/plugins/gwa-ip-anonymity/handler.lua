@@ -30,7 +30,8 @@ end
 function BcGovIpAnonymousHandler:access(conf)
   BcGovIpAnonymousHandler.super.access(self)
   anonymizeHeaderIps('Forwarded')
-  ngx.var.upstream_x_forwarded_for = anonymizeHeaderIps('x-forwarded-for')
+  anonymizeHeaderIps('x-forwarded-for')
+  ngx.var.upstream_x_forwarded_for = anonymizeIps(ngx.var.upstream_x_forwarded_for)
 end
 
 BcGovIpAnonymousHandler.PRIORITY = 10000
