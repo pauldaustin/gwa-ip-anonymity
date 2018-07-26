@@ -62,6 +62,7 @@ Edit the kong.conf file
 ```
 custom_plugins = otherplugin,gwa-ip-anonymity
 ```
+
 # License
 Copyright 2018 Province of British Columbia
 
