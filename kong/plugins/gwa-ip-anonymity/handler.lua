@@ -1,39 +1,41 @@
 local BasePlugin = require "kong.plugins.base_plugin"
 
-local BcGovIpAnonymousHandler = BasePlugin:extend()
+local GwaIpAnonymousHandler = BasePlugin:extend()
 
-function anonymizeIps(ips)
+function anonymizeIps(conf, ips)
   if ips == nil then
     return nil
   else
     -- ipv6
-    ips = ips:gsub('([%da-fA-F]*:[%da-fA-F:]*:)[%da-fA-F]+', '%10')
+    local ipv6Mask = conf.ipv6_mask or '0'
+    ips = ips:gsub('([%da-fA-F]*:[%da-fA-F:]*:)[%da-fA-F]+', '%1'..ipv6Mask)
     
     -- ipv4
-    ips = ips:gsub('(%d+%.%d+%.%d+%.)%d+', '%10')
+     local ipv4Mask = conf.ipv4_mask or '0'
+   ips = ips:gsub('(%d+%.%d+%.%d+%.)%d+', '%1'..ipv4Mask)
     return ips
   end
 end
 
 
-function anonymizeHeaderIps(name)
+function anonymizeHeaderIps(conf, name)
   local ips = ngx.req.get_headers()[name];
-  ips = anonymizeIps(ips)
+  ips = anonymizeIps(conf, ips)
   ngx.req.set_header(name, ips)
   return ips
 end
 
-function BcGovIpAnonymousHandler:new()
-  BcGovIpAnonymousHandler.super.new(self, "gwa-ip-anonymity")
+function GwaIpAnonymousHandler:new()
+  GwaIpAnonymousHandler.super.new(self, "gwa-ip-anonymity")
 end
 
-function BcGovIpAnonymousHandler:access(conf)
-  BcGovIpAnonymousHandler.super.access(self)
-  anonymizeHeaderIps('Forwarded')
-  anonymizeHeaderIps('x-forwarded-for')
-  ngx.var.upstream_x_forwarded_for = anonymizeIps(ngx.var.upstream_x_forwarded_for)
+function GwaIpAnonymousHandler:access(conf)
+  GwaIpAnonymousHandler.super.access(self)
+  anonymizeHeaderIps(conf, 'Forwarded')
+  anonymizeHeaderIps(conf, 'x-forwarded-for')
+  ngx.var.upstream_x_forwarded_for = anonymizeIps(conf, ngx.var.upstream_x_forwarded_for)
 end
 
-BcGovIpAnonymousHandler.PRIORITY = 10000
+GwaIpAnonymousHandler.PRIORITY = 10000
 
-return BcGovIpAnonymousHandler
+return GwaIpAnonymousHandler
