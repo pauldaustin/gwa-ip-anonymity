@@ -54,3 +54,4 @@ target
 *.tmp
 *.ldb
 
+/kong-plugin-gwa-ip-anonymity-0.0.0-0.rockspec
