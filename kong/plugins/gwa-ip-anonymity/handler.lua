@@ -11,8 +11,8 @@ function anonymizeIps(conf, ips)
     ips = ips:gsub('([%da-fA-F]*:[%da-fA-F:]*:)[%da-fA-F]+', '%1'..ipv6Mask)
     
     -- ipv4
-     local ipv4Mask = conf.ipv4_mask or '0'
-   ips = ips:gsub('(%d+%.%d+%.%d+%.)%d+', '%1'..ipv4Mask)
+    local ipv4Mask = conf.ipv4_mask or '0'
+    ips = ips:gsub('(%d+%.%d+%.%d+%.)%d+', '%1'..ipv4Mask)
     return ips
   end
 end
