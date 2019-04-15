@@ -1,7 +1,7 @@
 local re_match= ngx.re.match
 
 local function validate_ipv4(value)
-  if value != nil then
+  if value ~= nil then
     local number = tonumber(value)
     if number != nil and value >=0 and value <=255 then
       return true
@@ -11,7 +11,7 @@ local function validate_ipv4(value)
 end
 
 local function validate_ipv6(value)
-  if value != nil then
+  if value ~= nil then
     local number = tonumber(value)
     if number != nil and value >=0 and value <=9999 then
       return true
