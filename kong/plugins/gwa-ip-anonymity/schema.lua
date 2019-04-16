@@ -25,12 +25,12 @@ return {
   fields = {
     ipv4_mask = {
       type = "number",
-      default = "0",
+      default = 0,
       func = validate_ipv4
     },
     ipv6_mask = {
       type = "number",
-      default = "0",
+      default = 0,
       func = validate_ipv6
     }
   }
